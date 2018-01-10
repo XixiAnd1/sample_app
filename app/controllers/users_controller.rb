@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
+    
+
   def destroy
 	User.find(params[:id]).destroy
 	flash[:success] = "User destroyed."
@@ -30,6 +32,7 @@ class UsersController < ApplicationController
 
   def show
 	@user = User.find(params[:id])
+  	@microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
